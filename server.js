@@ -3,6 +3,11 @@ const app = express();
 const PORT = 3000;
 const db = require("./app/models");
 const dbconfig = require("./app/config/db.config");
+const bodyParser = require("body-parser");
+
+
+
+app.use(bodyParser.json());
 
 app.listen(PORT,()=>{
     console.log(`E-Com Application is running on http://localhost:${PORT}`);
@@ -13,7 +18,7 @@ app.get("/",(req,res)=>{
 })
 
 
-db.mongoose.connect(`mongodb://${dbconfig.HOST}:${dbconfig.PORT}/${dbconfig.DB}`, {
+db.mongoose.connect(`mongodb://${dbconfig.HOSTNAME}:${dbconfig.PORT}/${dbconfig.DB}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(()=>{
