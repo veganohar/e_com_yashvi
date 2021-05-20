@@ -2,11 +2,10 @@ const db = require("../models");
 const Product =  db.product;
 
 exports.getAllProducts = (req,res)=>{
-Product.find((err,products)=>{
+Product.find().sort("-createdOn").exec((err,products)=>{
     if(err){
         return res.status(500).send({message:err});
     }
-    console.log(products);
     res.send({
         message:"Products Retrieved successfully",
         data:products
@@ -31,7 +30,7 @@ exports.createProduct = (req,res)=>{
     let product  = new Product();
     for(let p in body){
         product[p] = body[p];
-    }    
+    } 
     product.save((err,response)=>{
         if(err){
             return res.status(500).send({message:err});

@@ -4,11 +4,11 @@ const PORT = 3000;
 const db = require("./app/models");
 const dbconfig = require("./app/config/db.config");
 const bodyParser = require("body-parser");
-
+const cors = require("cors");
 
 
 app.use(bodyParser.json());
-
+app.use(cors()); 
 app.listen(PORT,()=>{
     console.log(`E-Com Application is running on http://localhost:${PORT}`);
 })

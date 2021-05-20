@@ -5,10 +5,10 @@ const Product= mongoose.model(
     new mongoose.Schema({
         name:String,
         mrp:Number,
-        ram:Number,
+        ram:Number, 
         storage:Number,
         color:String,
-        discuont:Number,
+        discount:Number,
         createdOn:{
             type:Date,
             default:Date.now
