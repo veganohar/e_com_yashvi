@@ -1,5 +1,6 @@
 var allProducts = [];
-
+var isEdit = false;
+var selId;
 window.onload = function () {
     getAllProducts();
 }
@@ -13,7 +14,7 @@ function onSubmit() {
         color: document.getElementById("color").value,
         discount: document.getElementById("discount").valueAsNumber
     }
-    addNewProduct(obj);
+   isEdit?updateProduct(obj):addNewProduct(obj);
 }
 
 
@@ -33,6 +34,22 @@ async function addNewProduct(data) {
     document.getElementById("productForm").reset();
 }
 
+async function updateProduct(data){
+    data.id= selId;
+    let uri = `http://localhost:3000/api/products/updateProduct`;
+    let options = {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    }
+    let response = await fetch(uri, options);
+    getAllProducts();
+    document.getElementById("productForm").reset();
+    onReset();
+}
 
 async function getAllProducts() {
     let uri = `http://localhost:3000/api/products/getAllProducts`;
@@ -40,7 +57,6 @@ async function getAllProducts() {
     let data = await response.json();
     allProducts = data.data;
     showAllProducts()
-    console.log(data);
 }
 
 function showAllProducts() {
@@ -71,20 +87,46 @@ function showAllProducts() {
     }
 }
 
+function onReset(){
+    document.getElementById("sbtn").innerHTML = "Add";
+    document.getElementById("sbtn").className = "btn btn-primary";
+    isEdit = false;
+    selId = null;
+}
+
 async function onEdit(id){
-    console.log(id);
+    selId = id;
     let uri = `http://localhost:3000/api/products/getProductById/${id}`;
     let response = await fetch(uri);
     let data = await response.json();
-    console.log(data);
+    let product = data.data;
+    document.getElementById("name").value = product.name;
+    document.getElementById("mrp").value = product.mrp;
+    document.getElementById("ram").value = product.ram;
+    document.getElementById("storage").value = product.storage;
+    document.getElementById("color").value = product.color;
+    document.getElementById("discount").value = product.discount;
+    document.getElementById("sbtn").innerHTML = "Update";
+    document.getElementById("sbtn").className = "btn btn-success";
+    isEdit = true;
 }
 
-function onDelete(id){
-    console.log(id);
+async function onDelete(id){
+    if (confirm('Are you sure you want to Delete this Product?')) {
+        let uri = `http://localhost:3000/api/products/deleteProduct/${id}`;
+        let options = {
+            method: 'DELTE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }
+        let response = await fetch(uri, options);
+        getAllProducts();
+      } 
 }
  
 async function onStatus(id,e){
-
     let data = {
         isActive:e.target.checked,
         id:id
@@ -96,7 +138,7 @@ async function onStatus(id,e){
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-        },
+        }
     }
     let response = await fetch(uri, options);
     getAllProducts();
