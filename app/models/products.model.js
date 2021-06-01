@@ -9,6 +9,7 @@ const Product= mongoose.model(
         storage:Number,
         color:String,
         discount:Number,
+        image:String,
         createdOn:{
             type:Date,
             default:Date.now

@@ -1,6 +1,7 @@
 var allProducts = [];
 var isEdit = false;
 var selId;
+var base64String;
 window.onload = function () {
     getAllProducts();
 }
@@ -19,6 +20,7 @@ function onSubmit() {
 
 
 async function addNewProduct(data) {
+    data.image = base64String;
     let uri = `http://localhost:3000/api/products/createProduct`;
     let options = {
         method: 'POST',
@@ -32,10 +34,12 @@ async function addNewProduct(data) {
     let result = await response.json();
     getAllProducts();
     document.getElementById("productForm").reset();
+    base64String = null;
 }
 
 async function updateProduct(data){
     data.id= selId;
+    base64String?data.image = base64String:'';
     let uri = `http://localhost:3000/api/products/updateProduct`;
     let options = {
         method: 'PUT',
@@ -56,6 +60,7 @@ async function getAllProducts() {
     let response = await fetch(uri);
     let data = await response.json();
     allProducts = data.data;
+    console.log(allProducts);
     showAllProducts()
 }
 
@@ -75,6 +80,7 @@ function showAllProducts() {
                 <td>${obj.storage}</td>
                 <td>${obj.color}</td>
                 <td>${obj.discount} %</td>
+                <td><img src="${obj.image}" height="50"></td>
                 <td>
                     <button class="btn btn-info" onclick="onEdit('${obj._id}')">Edit</button>
                     <button class="btn btn-danger" onclick="onDelete('${obj._id}')">Delete</button>
@@ -92,6 +98,7 @@ function onReset(){
     document.getElementById("sbtn").className = "btn btn-primary";
     isEdit = false;
     selId = null;
+    base64String = null;
 }
 
 async function onEdit(id){
@@ -142,4 +149,13 @@ async function onStatus(id,e){
     }
     let response = await fetch(uri, options);
     getAllProducts();
+}
+
+function onUplaod(e){
+    let file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = function() {
+        base64String = reader.result;
+      }
+      reader.readAsDataURL(file);
 }

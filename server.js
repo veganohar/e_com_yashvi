@@ -7,8 +7,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 
-app.use(bodyParser.json());
-// app.use(cors()); 
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(cors()); 
 app.listen(PORT,()=>{
     console.log(`E-Com Application is running on http://localhost:${PORT}`);
 })
