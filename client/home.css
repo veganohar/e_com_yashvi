@@ -1,0 +1,107 @@
+.logoClass img{
+    height: 70px;
+}
+.logoClass{
+    text-align: right;
+}
+.cartDiv{
+    margin: auto;
+}
+.cartDiv img{
+    cursor: pointer;
+}
+.hc{
+    text-align: center;
+    margin: 20px;
+    font-size: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+.productData{
+    border: 1px solid rgba(0,0,0,0.25);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    margin-bottom: 30px;
+}
+.productDetails{
+    padding: 10px;
+}
+.productName{
+    font-size: 16px;
+    font-weight: 700;
+}
+.mrp{
+    color: red;
+    text-decoration: line-through;
+    margin: auto;
+}
+.price{
+    text-align: right;
+    font-weight: 700;
+    font-size: 14px;
+}
+.cartBtn{
+    margin-top: 30px;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 5px;
+    border:none;
+    padding: 3px 7px;
+}
+/* .cartArea{
+    width: max-content;
+}
+.cartArea:hover #cartTableDiv{
+    display: block;
+}
+#cartTableDiv{
+    display: none;
+    height: 450px;
+    position: absolute;
+    background-color: white;
+    z-index: 1;
+    width: 350px;
+    right: 0;
+}
+
+table img{
+    max-width: 80px;
+    max-height: 80px;
+}
+.table{
+    display: table;
+    height: 350px;
+    overflow-y: auto;
+
+}
+.table td{
+    vertical-align: middle;
+}
+.fa-times-circle{
+    color: red;
+    cursor: pointer;
+}
+.ec{
+    width: 70%;
+    height: 40px;
+    border: lightgray 1px solid;
+    font-size: 14px;
+    font-weight: 600;
+}
+.ec:hover{
+    background-color: lightgray;
+} */
+.discount{
+    color: green;
+    font-weight: 600;
+}
+.pimg{
+    height: 200px;
+    text-align: center;
+    padding: 5px;
+}
+.pimg img{
+    max-height: 200px;
+    width: auto;
+    height: auto;
+}

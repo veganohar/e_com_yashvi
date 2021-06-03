@@ -4,12 +4,10 @@ module.exports = function(app){
         res.header(
           "Access-Control-Allow-Headers","x-access-token, Origin, Content-Type, Accept"
         );
-        // res.append('Access-Control-Allow-Origin', '*');
-        // res.append("Access-Control-Allow-Headers","x-access-token, Origin, Content-Type, Accept");
-        // res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
         next();
       });
     app.get('/api/products/getAllProducts',controller.getAllProducts);
+    app.get('/api/products/getActiveProducts',controller.getActiveProducts);
     app.get('/api/products/getProductById/:pid',controller.getProductById);
     app.post('/api/products/createProduct',controller.createProduct);
     app.put('/api/products/updateProduct',controller.updateProduct);

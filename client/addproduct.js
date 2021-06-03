@@ -122,7 +122,7 @@ async function onDelete(id){
     if (confirm('Are you sure you want to Delete this Product?')) {
         let uri = `http://localhost:3000/api/products/deleteProduct/${id}`;
         let options = {
-            method: 'DELTE',
+            method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

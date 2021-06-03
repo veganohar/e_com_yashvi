@@ -67,3 +67,15 @@ exports.updateProduct = (req,res)=>{
         })
     })
 }
+
+exports.getActiveProducts = (req,res)=>{
+    Product.find({isActive:true}).sort("-createdOn").exec((err,products)=>{
+        if(err){
+            return res.status(500).send({message:err});
+        }
+        res.send({
+            message:"Products Retrieved successfully",
+            data:products
+        })
+    })
+}
