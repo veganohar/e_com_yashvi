@@ -48,6 +48,16 @@ function calculatePrice(p){
     return price;
 }
 
-function onAddToCart(id){
-console.log(id);
+async function onAddToCart(id){
+    let uri = `http://localhost:3000/api/cart/addItemToCart/${id}`;
+    let options = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    }
+    let response = await fetch(uri, options);
+    let result = await response.json();
+    console.log(result);
 }
